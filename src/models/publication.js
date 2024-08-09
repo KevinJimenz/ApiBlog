@@ -8,7 +8,6 @@ export const publicationModel = sequelize.define("publications", {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
-    defaultValue: ' ',
   },
   title: {
     type: DataTypes.STRING,

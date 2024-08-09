@@ -13,6 +13,7 @@ export const create = async (req,res) =>{
     const category = req.params.id;
     const file = req.file.path;
     const newPublication = await publicationModel.create({
+        id: 0,
         title,
         description,
         photo: file,
