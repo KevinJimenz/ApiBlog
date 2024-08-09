@@ -10,13 +10,13 @@ export const list = async (req, res) =>{
 export const create = async (req,res) =>{
     const title = req.params.title;
     const description = req.params.description;
-    const id = req.params.id;
+    const category = req.params.id;
     const file = req.file.path;
     const newPublication = await publicationModel.create({
         title,
         description,
         photo: file,
-        id_Category: id
+        id_Category: category
     });
     if ( newPublication ) {
         res.status(200).send({ message: "Publication Created"})
