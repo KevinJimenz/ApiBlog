@@ -8,14 +8,22 @@ export const list = async (req, res) =>{
 
 // ? Crete a Publication
 export const create = async (req,res) =>{
-    const {title, description, photo, id_Category} = req.body;
+    const title = req.params.title;
+    const description = req.params.description;
+    const id = req.params.id;
+    const file = req.file.path;
     const newPublication = await publicationModel.create({
         title,
         description,
-        photo,
-        id_Category
+        photo: file,
+        id_Category: id
     });
-    res.send({newPublication});
+    if ( newPublication ) {
+        res.status(200).send({ message: "Publication Created"})
+    }
+    else {
+        res.status(400).send({ message: "Error in the request"})
+    }
 }
 
 // ? Edit a Publication
