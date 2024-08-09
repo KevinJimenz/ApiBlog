@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize"; // Importo los tipos de datos de sequeliz
 import { sequelize } from "./db.js"; // Importo la conexion a la base de datos
 // ? Si en la base de datos la tabla en el campo ( id )
 // ? Es AUTO_INCREMENT, en el modelo hay que especificar es verdadero
-export const publicationModel = sequelize.define("publication", {
+export const publicationModel = sequelize.define("publications", {
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
