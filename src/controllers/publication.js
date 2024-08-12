@@ -3,7 +3,13 @@ import {publicationModel} from "../models/publication.js" ;
 // ? Get all Publications 
 export const list = async (req, res) =>{
     const list = await publicationModel.findAll();
-    res.send({list})
+    res.send({id: list.id , title: list.title, description: list.description, idCategory: list.id_Category})
+}
+
+// ? Get only the photos
+export const listPhotos = async (req, res) =>{
+    const list = await publicationModel.findAll();
+    res.send({photo: list.photo})
 }
 
 // ? Crete a Publication
