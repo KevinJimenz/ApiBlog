@@ -12,7 +12,7 @@ import {sequelize} from "./src/models/db.js" // Conexion a base de datos
 
 // Configuracion cors para evitar el "Cross-Origin Request Blocked" 'http://localhost:5173'
 const corsOptions = {
-  origin: 'http://localhost:5173', // Especifico la direccion de origen de la peticion
+  origin: '*', // Especifico la direccion de origen de la peticion
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Indico que peticiones http se van usar
   allowedHeaders: ['Content-Type', 'Authorization'] // Autoriza a los headers
 };
