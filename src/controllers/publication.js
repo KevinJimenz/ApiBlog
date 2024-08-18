@@ -15,11 +15,13 @@ export const listPhotos = async (req, res) => {
   const images = []
   await Promise.all(
     list.map(async (element) => {
-      const nombreFoto = element.dataValues.photo.replace(/^.*[\\/]/, ""); // Solo uso el nombre con el que se guardó la imagen
-      const ruta_api = "./uploads/publications/" + nombreFoto; // Construye la ruta completa de la imagen
+      const nombreFoto = element.dataValues.photo.replace(/^.*[\\/]/, "");
+      const ruta_api = path.resolve("./uploads/publications/" + nombreFoto);
+  
       try {
         await fs.promises.access(ruta_api); // Verifica si el archivo existe
-        images.push(path.resolve(ruta_api)); // Guarda la ruta en el arreglo de imágenes
+        const imageBuffer = await fs.promises.readFile(ruta_api); // Lee la imagen como Buffer
+        images.push(imageBuffer); // Añade el Buffer al arreglo de imágenes
       } catch (error) {
         return res.status(404).send({ error: error.message });
       }
