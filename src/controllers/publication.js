@@ -1,3 +1,4 @@
+import { error } from "console";
 import { publicationModel } from "../models/publication.js";
 import fs from "fs";
 import path from "path";
@@ -11,21 +12,20 @@ export const list = async (req, res) => {
 // ? Get only the photos
 export const listPhotos = async (req, res) => {
   const list = await publicationModel.findAll();
-  const images = list.map((element) => {
-    const nombreFoto = element.photo.replace(/^.*[\\/]/, ""); // Solo uso el nombre con el que se guardó la imagen
-    const ruta_api = path.join("./uploads/publications/", nombreFoto); // Construye la ruta completa de la imagen
-    // Verificar si el archivo existe en la ruta especificada
-    if (fs.existsSync(ruta_api)) {
-      // Si el archivo existe, devuelve la ruta relativa para acceder a la imagen
-      return `/uploads/publications/${nombreFoto}`;
-    } 
-    else 
-    {
-      // Si el archivo no existe, devuelve un objeto de error con el nombre de la foto
-      return { status: "error", nombreFoto };
-    }
-  });
-    res.send(images);
+  const images = []
+  await Promise.all(
+    list.map(async (element) => {
+      const nombreFoto = element.dataValues.photo.replace(/^.*[\\/]/, ""); // Solo uso el nombre con el que se guardó la imagen
+      const ruta_api = "./uploads/publications/" + nombreFoto; // Construye la ruta completa de la imagen
+      try {
+        await fs.promises.access(ruta_api); // Verifica si el archivo existe
+        images.push(path.resolve(ruta_api)); // Guarda la ruta en el arreglo de imágenes
+      } catch (error) {
+        return res.status(404).send({ error: error.message });
+      }
+    })
+  );
+  res.status(200).send({images})
 };
 
 // ? Crete a Publication
