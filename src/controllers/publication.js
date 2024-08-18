@@ -23,7 +23,7 @@ export const listPhotos = async (req, res) => {
         const imageBuffer = await fs.promises.readFile(ruta_api); // Lee la imagen como Buffer
         images.push(imageBuffer); // Añade el Buffer al arreglo de imágenes
       } catch (error) {
-        return res.status(404).send({ error: error.message });
+        return res.send({ error: error.message });
       }
     })
   );
