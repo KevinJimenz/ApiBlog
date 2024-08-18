@@ -25,7 +25,7 @@ export const listPhotos = async (req, res) => {
       }
     })
   );
-  res.status(200).send({images})
+  res.send({images})
 };
 
 // ? Crete a Publication
