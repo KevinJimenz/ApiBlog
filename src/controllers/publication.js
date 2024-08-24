@@ -1,33 +1,9 @@
-import { error } from "console";
 import { publicationModel } from "../models/publication.js";
-import fs from "fs";
-import path from "path";
 
 // ? Get all Publications
 export const list = async (req, res) => {
   const list = await publicationModel.findAll();
   res.send({list});
-};
-
-// ? Get only the photos
-export const listPhotos = async (req, res) => {
-  const list = await publicationModel.findAll();
-  const images = []
-  await Promise.all(
-    list.map(async (element) => {
-      const nombreFoto = element.dataValues.photo.replace(/^.*[\\/]/, "");
-      const ruta_api = path.resolve("./uploads/publications/" + nombreFoto);
-  
-      try {
-        await fs.promises.access(ruta_api); // Verifica si el archivo existe
-        const imageBuffer = await fs.promises.readFile(ruta_api); // Lee la imagen como Buffer
-        images.push(imageBuffer); // Añade el Buffer al arreglo de imágenes
-      } catch (error) {
-        return res.send({ error: error.message });
-      }
-    })
-  );
-  res.send({images})
 };
 
 // ? Crete a Publication
