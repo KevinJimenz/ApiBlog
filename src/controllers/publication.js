@@ -1,10 +1,28 @@
 import { publicationModel } from "../models/publication.js";
-
+import fs from 'fs';
+import path from "path";
 // ? Get all Publications
 export const list = async (req, res) => {
   const list = await publicationModel.findAll();
   res.send({list});
 };
+
+// ? Get only the publication's photo
+export const getPhoto = async (req, res ) => {
+  const photo = req.params.file;
+  const ruta_api = './uploads/publications/' + photo ;
+  fs.access(ruta_api, (error) => {
+    if (!error) {
+      return res.sendFile(path.resolve(ruta_api));
+    } else {
+      res.status(404).send({
+        status: "error",
+        mensaje: "no existe la imagen",
+        error
+      });
+    }
+  });
+}
 
 // ? Crete a Publication
 export const create = async (req, res) => {

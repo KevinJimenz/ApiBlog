@@ -3,6 +3,7 @@ import multer from "multer"; // Importo el multer para el almacenamiento de las 
 
 import { 
     list,
+    getPhoto,
     create,
     edit,
     destroy }
@@ -26,6 +27,7 @@ const almacenamiento = multer.diskStorage({
   const upload = multer({ storage: almacenamiento });
 
 publication.get("/listar/publication",list) ;
+publication.post("/traerFoto/publication/:file", getPhoto )
 publication.post("/crear/publication/:title/:description/:id", upload.single("photo"),create) ;
 publication.delete("/eliminar/publication/:id",destroy) ;
 publication.put("/editar/publication/:id",edit) ;
