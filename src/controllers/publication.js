@@ -61,7 +61,8 @@ export const edit = async (req, res) => {
 
 // ? Delete a Publication
 export const destroy = async (req, res) => {
-  const deletePublication = await publicationModel.findByPk(req.params.id);
+  const id = req.params.id;
+  const deletePublication = await publicationModel.findByPk(id);
   if (deletePublication) {
     await deletePublication.destroy();
     res.send({ status: "OK", answer: "Publicacion Eliminada" });

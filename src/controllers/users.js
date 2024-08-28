@@ -8,7 +8,7 @@ export const list = async (req, res) => {
   res.send({ list });
 };
 
-// ? Crete
+// ? Create
 export const create = async (req, res) => {
   // Recibo los valores por parametros
   const name = req.params.name;
