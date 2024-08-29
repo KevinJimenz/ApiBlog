@@ -30,6 +30,6 @@ publication.get("/listar/publication",list) ;
 publication.post("/traerFoto/publication/:file", getPhoto )
 publication.post("/crear/publication/:title/:description/:id", upload.single("photo"),create) ;
 publication.delete("/eliminar/publication/:id",destroy) ;
-publication.put("/editar/publication/:id",edit) ;
+publication.put("/editar/publication/:id/:title/:description/:idCategory", upload.single("photo"),edit) ;
 // ? Se exporta 
 export {publication}

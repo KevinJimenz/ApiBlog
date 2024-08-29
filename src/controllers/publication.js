@@ -45,13 +45,17 @@ export const create = async (req, res) => {
 
 // ? Edit a Publication
 export const edit = async (req, res) => {
-  const { title, description, photo, id_Category } = req.body;
-  const editPublication = await publicationModel.findByPk(req.params.id);
+  const id = req.params.id;
+  const title = req.params.title;
+  const description = req.params.description;
+  const idCategory = req.params.idCategory;
+  const file = req.file.path;
+  const editPublication = await publicationModel.findByPk(id);
   if (editPublication) {
     editPublication.title = title;
     editPublication.description = description;
-    editPublication.photo = photo;
-    editPublication.id_Category = id_Category;
+    editPublication.photo = file;
+    editPublication.id_Category = idCategory;
     await editPublication.save();
     res.send({ status: "OK", answer: "Publicacion Editada" });
   } else {
