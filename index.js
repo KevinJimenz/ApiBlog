@@ -9,6 +9,7 @@ import {detail_publication} from './src/routes/detail_publication.js'
 import {publication} from './src/routes/publication.js'
 import {users} from './src/routes/users.js'
 import {sequelize} from "./src/models/db.js" // Conexion a base de datos
+const app = express()
 
 // Configuracion cors para evitar el "Cross-Origin Request Blocked" 'http://localhost:5173'
 const corsOptions = {
@@ -18,7 +19,6 @@ const corsOptions = {
 };
 
 // Configuracions App
-const app = express()
 dotenv.config();
 app.use(cors(corsOptions)); // Indico que la app va a usar cors y al cors le paso la configuracion
 app.use(express.json());
