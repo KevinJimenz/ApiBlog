@@ -15,7 +15,8 @@ const app = express()
 const corsOptions = {
   origin: '*', // Especifico la direccion de origen de la peticion
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Indico que peticiones http se van usar
-  allowedHeaders: ['Content-Type', 'Authorization'] // Autoriza a los headers
+  allowedHeaders: ['Content-Type', 'Authorization'], // Autoriza a los headers
+  exposedHeaders: ['Access-Control-Allow-Origin'] // Expone el header Access-Control-Allow-Origin
 };
 
 // Configuracions App
