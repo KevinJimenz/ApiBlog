@@ -8,13 +8,18 @@ export const list = async (req, res) =>{
 
 // ? Crete 
 export const create = async (req,res) =>{
-    const idComment = req.params.idComment;
-    const idPublication = req.params.idPublication;
-    const newDetail_Publication = await detail_publicationModel.create({
-        id_Comment: idComment,
-        id_Publication: idPublication,
-    });
-    res.send({newDetail_Publication});
+    try {
+        const idComment = req.params.idComment;
+        const idPublication = req.params.idPublication;
+        const newDetail_Publication = await detail_publicationModel.create({
+            id_Comment: idComment,
+            id_Publication: idPublication,
+        });
+        res.send({ status: "OK" , message: "Detail publication created"});
+    }
+    catch(error){
+        res.send({ status: "Error" , message: error});
+    }
 }
 
 // ? Edit 
