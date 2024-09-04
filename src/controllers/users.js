@@ -66,7 +66,7 @@ export const validateCredentials = async (req, res) => {
   });
   const validatePassword = compararPassword(pass, infoUser.password);
   if (validatePassword) {
-    res.send({ username: infoUser.name, rol: infoUser.rol, photo: infoUser.photo });
+    res.send({ username: infoUser.name, rol: infoUser.rol, photo: infoUser.photo , email: infoUser.email_address});
   } else {
     res.send({ message: "Incorrect Credentials" });
   }
