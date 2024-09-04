@@ -11,8 +11,8 @@ export const create = async (req,res) =>{
     const idComment = req.params.idComment;
     const idPublication = req.params.idPublication;
     const newDetail_Publication = await detail_publicationModel.create({
-        idComment,
-        idPublication,
+        id_Comment: idComment,
+        id_Publication: idPublication,
     });
     res.send({newDetail_Publication});
 }
