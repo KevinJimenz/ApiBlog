@@ -8,10 +8,11 @@ export const list = async (req, res) =>{
 
 // ? Crete 
 export const create = async (req,res) =>{
-    const {id_Comment, id_Publication} = req.body;
+    const idComment = req.params.idComment;
+    const idPublication = req.params.idPublication;
     const newDetail_Publication = await detail_publicationModel.create({
-        id_Comment,
-        id_Publication,
+        idComment,
+        idPublication,
     });
     res.send({newDetail_Publication});
 }

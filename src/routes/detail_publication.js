@@ -10,7 +10,7 @@ import {
 const detail_publication = Router();
 // ? se hacen las rutas con sus respectivas peticions http
 detail_publication.get("/listar/detailPublication",list) ;
-detail_publication.post("/crear/detailPublication",create) ;
+detail_publication.post("/crear/detailPublication/:idComment/:idPublication",create) ;
 detail_publication.delete("/eliminar/detailPublication/:id",destroy) ;
 detail_publication.put("/editar/detailPublication/:id",edit) ;
 // ? Se exporta 
