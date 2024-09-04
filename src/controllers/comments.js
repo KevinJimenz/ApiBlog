@@ -6,17 +6,6 @@ export const list = async (req,res)=>{
     res.send({list})
 };
 
-export const BringLastComment = async (req, res) => {
-  try {
-      const lastComment = await commentsModel.findOne({
-          order: [['id', 'DESC']] 
-      });
-      res.send({ lastComment });
-  } catch (error) {
-      res.status(500).send({ error: 'Ocurrió un error al obtener el último comentario.' });
-  }
-};
-
 // ? Create
 export const create = async (req,res)=>{
     const description = req.params.description ;
