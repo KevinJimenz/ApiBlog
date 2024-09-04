@@ -91,6 +91,21 @@ export const bringFile = async (req, res) => {
   });
 };
 
+export const bringId = async (req, res) => {
+  const email = req.params.email ;
+  const infoUser = await usersModel.findOne({
+    where: { email_address: email },
+  });
+  if (infoUser)
+  {
+    res.send({idUser: infoUser.id})
+  }
+  else
+  {
+    res.send({ message: "The user does not exist" });
+  }
+}
+
 /**
  * @param {string} pass, Ingresa la cadena de texto que el usuario usa como password
  * @returns retorna la cadena encriptada

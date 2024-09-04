@@ -3,6 +3,7 @@ import { Router } from "express";
 // ? Llamo a los crud
 import { 
     list,
+    BringLastComment,
     create,
     edit,
     destroy }
@@ -10,7 +11,8 @@ import {
 const comments = Router();
 // ? se hacen las rutas con sus respectivas peticions http
 comments.get("/listar/comments",list) ;
-comments.post("/crear/comments",create) ;
+comments.get("/TraerUltimoComentario/comments",BringLastComment) ;
+comments.post("/crear/comments/:description/:idUser",create) ;
 comments.delete("/eliminar/comments/:id",destroy) ;
 comments.put("/editar/comments/:id",edit) ;
 // ? Se exporta 

@@ -8,6 +8,7 @@ import {
   destroy,
   bringFile,
   validateCredentials,
+  bringId
 } from "../controllers/users.js";
 const users = Router();
 
@@ -33,6 +34,7 @@ users.post("/crear/users/:name/:email/:pass", upload.single("photo"), create);
 users.delete("/eliminar/users/:id", destroy);
 users.put("/editar/users/:id", edit);
 users.post("/traerImagen/users/:file", bringFile);
+users.post("/traerIdUser/users/:email", bringId);
 users.get("/validarCredenciales/users/:email/:pass", validateCredentials);
 
 export { users };
