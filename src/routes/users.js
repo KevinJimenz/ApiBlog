@@ -8,25 +8,24 @@ import {
   destroy,
   bringFile,
   validateCredentials,
-  bringId
+  bringId,
 } from "../controllers/users.js";
 const users = Router();
 
 // Configurar el almacenamiento con diskStorge
 const almacenamiento = multer.diskStorage({
   // Configurar el directorio de destino para las imagenes
-  destination: function(req, file, cb)  {
-    cb(null, "uploads/")
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
   },
   // Configura el nombre del archivo
-  filename: function(req, file, cb) {
+  filename: function (req, file, cb) {
     // Se va guardar como ( users-fecha Actual-nombre del archivo)
-    cb(null, "users" + '-' + Date.now() + '-' + file.originalname)
+    cb(null, "users" + "-" + Date.now() + "-" + file.originalname);
   },
 });
 // Configura multer con el almacenamiento personalizado
 const upload = multer({ storage: almacenamiento });
-
 
 users.get("/listar/users", list);
 // ? Por el upload es por donde va a llegar el archivo, se llama 'photo' porque con ese identificador se envia

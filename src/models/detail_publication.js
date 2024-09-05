@@ -12,10 +12,18 @@ export const detail_publicationModel = sequelize.define("detail_publications", {
   id_Comment: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    references: {
+      model: 'comments', 
+      key: 'id'
+    }
   },
   id_Publication:{
     type: DataTypes.INTEGER,
     allowNull: false,
+    references: {
+      model: 'publications', 
+      key: 'id'
+    }
   }
 },
 {

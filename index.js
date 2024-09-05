@@ -3,12 +3,18 @@ import cors from 'cors'
 import dotenv from "dotenv" // Hace la configuracion de las variables globales para toda la aplicacion
 
 // Modelos
+import { detail_publicationModel } from './src/models/detail_publication.js'
+import { commentsModel } from './src/models/comments.js'
+import { publicationModel } from './src/models/publication.js'
+import {sequelize} from "./src/models/db.js" // Conexion a base de datos
+
+// Rutas
 import {categories} from './src/routes/categories.js'
 import {comments} from './src/routes/comments.js'
 import {detail_publication} from './src/routes/detail_publication.js'
 import {publication} from './src/routes/publication.js'
 import {users} from './src/routes/users.js'
-import {sequelize} from "./src/models/db.js" // Conexion a base de datos
+
 const app = express()
 
 // Configuracion cors para evitar el "Cross-Origin Request Blocked" 'http://localhost:5173'
@@ -28,10 +34,17 @@ app.use(express.urlencoded({ extended: true }));
 /**
  * Primero toma la variable que tenemos definida en el archivo .ENV
  * Sino no hay un puerto por defecto toma el 3000
- */
+*/
 const port = process.env.PORT || 3000;
 
-// Rutas 
+// Relaciones 
+detail_publicationModel.belongsTo(commentsModel, { foreignKey: 'id_Comment' })
+commentsModel.hasMany(detail_publicationModel, { foreignKey: 'id_Comment' })
+
+detail_publicationModel.belongsTo(publicationModel, { foreignKey: 'id_Publication' })
+publicationModel.hasMany(detail_publicationModel, { foreignKey: 'id_Publication' })
+
+// Rutas que la aplicacion va a usar 
 app.use(categories); 
 app.use(comments);
 app.use(detail_publication);

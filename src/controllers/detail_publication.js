@@ -1,8 +1,27 @@
 import {detail_publicationModel} from "../models/detail_publication.js" ;
-
+// Modelos relacionados
+import {commentsModel} from '../models/comments.js'
+import { publicationModel } from "../models/publication.js";
 // ? Get all  
 export const list = async (req, res) =>{
     const list = await detail_publicationModel.findAll();
+    res.send({list})
+}
+
+export const bringDetailPublication = async (req, res) =>{
+    const list = await detail_publicationModel.findAll({
+        // Creo un arreglo de objetos el cual va a tener los modelos relacionados
+        include: [
+            {
+                model: commentsModel,
+                required: true,  // Esto asegura que traiga la informacion que este asociada
+            },
+            {
+                model: publicationModel,
+                required: true,  
+            }
+        ]
+    });
     res.send({list})
 }
 
