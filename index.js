@@ -6,6 +6,7 @@ import dotenv from "dotenv" // Hace la configuracion de las variables globales p
 import { detail_publicationModel } from './src/models/detail_publication.js'
 import { commentsModel } from './src/models/comments.js'
 import { publicationModel } from './src/models/publication.js'
+import { usersModel } from './src/models/users.js'
 import {sequelize} from "./src/models/db.js" // Conexion a base de datos
 
 // Rutas
@@ -41,8 +42,8 @@ const port = process.env.PORT || 3000;
 detail_publicationModel.belongsTo(commentsModel, { foreignKey: 'id_Comment' })
 commentsModel.hasMany(detail_publicationModel, { foreignKey: 'id_Comment' })
 
-detail_publicationModel.belongsTo(publicationModel, { foreignKey: 'id_Publication' })
-publicationModel.hasMany(detail_publicationModel, { foreignKey: 'id_Publication' })
+usersModel.hasMany(commentsModel, { foreignKey: 'id_User' })
+commentsModel.belongsTo(usersModel, { foreignKey: 'id_User' })
 
 // Rutas que la aplicacion va a usar 
 app.use(categories); 

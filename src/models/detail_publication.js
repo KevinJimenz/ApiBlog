@@ -20,10 +20,6 @@ export const detail_publicationModel = sequelize.define("detail_publications", {
   id_Publication:{
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: 'publications', 
-      key: 'id'
-    }
   }
 },
 {
