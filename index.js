@@ -19,7 +19,7 @@ const app = express()
 
 // Configuracion cors para evitar el "Cross-Origin Request Blocked" 'http://localhost:5173'
 const corsOptions = {
-  origin: '*', // Especifico la direccion de origen de la peticion
+  origin: 'http://localhost:5173', // Especifico la direccion de origen de la peticion
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Indico que peticiones http se van usar
   allowedHeaders: ['Content-Type', 'Authorization'], // Autoriza a los headers
   exposedHeaders: ['Access-Control-Allow-Origin'] // Expone el header Access-Control-Allow-Origin
