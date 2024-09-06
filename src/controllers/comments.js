@@ -34,7 +34,8 @@ export const edit = async (req,res)=>{
 
 // ? Delete
 export const destroy = async (req,res)=>{
-    const deleteComment = await Comentario.findByPk(req.params.id);
+    const id = req.params.id ;
+    const deleteComment = await commentsModel.findByPk(id);
     if ( deleteComment )
       {
         await deleteComment.destroy() ;
