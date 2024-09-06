@@ -19,12 +19,12 @@ export const create = async (req,res)=>{
 
 // ? Edit
 export const edit = async (req,res)=>{
-  const {description, id_User} = req.body ;
-    const editComment = await commentsModel.findByPk(req.params.id);
+  const id_Comment = req.params.idComment;
+  const comment = req.params.comment;
+    const editComment = await commentsModel.findByPk(id_Comment);
     if ( editComment )
       {
-        editComment.description = description ;
-        editComment.id_User = id_User;
+        editComment.description = comment ;
         await editComment.save() ;
         res.send({ status: "OK", respuesta: "Comentario editado Correctamente"})
       } else{

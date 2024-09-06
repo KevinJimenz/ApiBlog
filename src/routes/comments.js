@@ -7,6 +7,6 @@ const comments = Router();
 comments.get("/listar/comments", list);
 comments.post("/crear/comments/:description/:idUser", create);
 comments.delete("/eliminar/comments/:id", destroy);
-comments.put("/editar/comments/:id", edit);
+comments.put("/editar/comments/:idComment/:comment", edit);
 
 export { comments };
